@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    11111111111111111
+    <div id='d1'></div>
+</body>
+<script>
+    var worker=new Worker('http://localhost:8080/1.js');
+    console.log(worker);
+    worker.postMessage([777777777])
+    worker.onerror=function (event) {
+        console.log([
+            'ERROR: Line ', e.lineno, ' in ', e.filename, ': ', e.message
+        ].join(''));
+    };
+    worker.onmessage = function(event) {
+        console.log(event)
+            document.getElementById("d1").innerHTML = event.data;
+        };
+</script>
+</html>
